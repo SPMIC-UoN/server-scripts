@@ -1,0 +1,18 @@
+#!/bin/sh
+set -e
+set -x
+
+RDRIVE=$1
+
+if [ -z "$RDRIVE" ]; then
+    echo "Usage: uon-activate_rdrive <dir>"
+    exit 1
+fi
+
+if [ ! -d "$RDRIVE" ]; then
+    echo "Creating directory: $RDRIVE"
+    mkdir -p $RDRIVE
+fi
+
+sudo mount -t cifs -o uid=$USER,username=$USER //AD/Data/research $RDRIVE
+

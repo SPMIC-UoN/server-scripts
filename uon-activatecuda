@@ -1,0 +1,16 @@
+CUDAVERSION=$1
+
+if [ -z "$CUDAVERSION" ]; then
+    CUDAVERSION=11.1
+fi
+
+CUDA=/usr/local/cuda-$CUDAVERSION
+if [ ! -d $CUDA ]; then
+    echo "No such directory: $CUDA"
+    return
+fi
+
+export CUDA
+export PATH=$CUDA/bin:$PATH
+export LD_LIBRARY_PATH=$CUDA/lib64:$LD_LIBRARY_PATH
+

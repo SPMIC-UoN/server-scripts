@@ -1,0 +1,23 @@
+#!/bin/sh
+
+FSLVERSION=$1
+
+if [ -z "$FSLVERSION" ]; then
+    FSLVERSION=6.0.5
+fi
+
+FSLDIR=/usr/local/fsl-$FSLVERSION
+
+if [ ! -d ${FSLDIR} ]; then
+    echo "No such directory: $FSLDIR"
+    return
+fi
+
+export FSLDIR
+source $FSLDIR/etc/fslconf/fsl.sh
+export PATH=$FSLDIR/bin:$PATH
+
+if [ $FSLVERSION == "6.0.6pre" ]; then
+    source $FSLDIR/bin/activate $FSLDIR
+fi
+
